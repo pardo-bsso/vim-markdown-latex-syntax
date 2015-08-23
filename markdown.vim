@@ -27,6 +27,8 @@ for s:type in map(copy(g:markdown_fenced_languages),'matchstr(v:val,"[^=]*$")')
 endfor
 unlet! s:type
 
+syn include @tex syntax/tex.vim
+
 syn sync minlines=10
 syn case ignore
 
@@ -74,6 +76,9 @@ syn region markdownLinkText matchgroup=markdownLinkTextDelimiter start="!\=\[\%(
 syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" contains=markdownUrl keepend contained
 syn region markdownId matchgroup=markdownIdDelimiter start="\[" end="\]" keepend contained
 syn region markdownAutomaticLink matchgroup=markdownUrlDelimiter start="<\%(\w\+:\|[[:alnum:]_+-]\+@\)\@=" end=">" keepend oneline
+
+syn region markdownMath start="\$" end="\$" keepend contains=@tex
+syn region markdownMath start="^\$\$" end="\$\$$" keepend contains=@tex
 
 syn region markdownItalic start="\S\@<=\*\|\*\S\@=" end="\S\@<=\*\|\*\S\@=" keepend contains=markdownLineStart
 syn region markdownItalic start="\S\@<=_\|_\S\@=" end="\S\@<=_\|_\S\@=" keepend contains=markdownLineStart
